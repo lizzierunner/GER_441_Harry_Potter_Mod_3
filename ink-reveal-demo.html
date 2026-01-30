@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ink Reveal Demo - Harry Potter Style</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      padding: 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: 'Crimson Text', Georgia, serif;
+      line-height: 1.8;
+    }
+    
+    .demo-section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .demo-title {
+      color: #d4af37;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    .demo-text {
+      font-size: 1.25rem;
+      color: #e8d4a8;
+      margin-bottom: 1rem;
+    }
+    
+    .demo-description {
+      font-size: 0.9rem;
+      color: #999;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+    
+    button {
+      background: #d4af37;
+      color: #000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    button:hover {
+      background: #eac85f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+    
+    .reset-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #d4af37;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>🖋️ Ink Reveal Animation Demo</h1>
+  
+  <div class="reset-container">
+    <button onclick="resetAllAnimations()">🔄 Reset All Animations</button>
+  </div>
+  
+  <!-- Demo 1: Basic -->
+  <div class="demo-section">
+    <h2 class="demo-title">1. Basic Ink Reveal (3 seconds)</h2>
+    <p class="demo-text ink-reveal" id="demo1">
+      I solemnly swear that I am up to no good.
+    </p>
+    <p class="demo-description">
+      Standard animation: 3 seconds, left-to-right reveal, blur from 8px to 0px
+    </p>
+  </div>
+  
+  <!-- Demo 2: Fast -->
+  <div class="demo-section">
+    <h2 class="demo-title">2. Fast Reveal (1.5 seconds)</h2>
+    <p class="demo-text ink-reveal ink-reveal-fast" id="demo2">
+      The wand chooses the wizard, Mr. Potter.
+    </p>
+    <p class="demo-description">
+      Quick writing: 1.5 seconds duration
+    </p>
+  </div>
+  
+  <!-- Demo 3: Slow -->
+  <div class="demo-section">
+    <h2 class="demo-title">3. Slow Reveal (5 seconds)</h2>
+    <p class="demo-text ink-reveal ink-reveal-slow" id="demo3">
+      It does not do to dwell on dreams and forget to live.
+    </p>
+    <p class="demo-description">
+      Careful writing: 5 seconds duration
+    </p>
+  </div>
+  
+  <!-- Demo 4: Staggered Lines -->
+  <div class="demo-section">
+    <h2 class="demo-title">4. Staggered Lines (Sequential)</h2>
+    <p class="demo-text ink-reveal" id="demo4a">
+      Mischief Managed.
+    </p>
+    <p class="demo-text ink-reveal ink-reveal-delay-1" id="demo4b">
+      Mr. Moony presents his compliments to Professor Snape,
+    </p>
+    <p class="demo-text ink-reveal ink-reveal-delay-2" id="demo4c">
+      and begs him to keep his abnormally large nose out of other people's business.
+    </p>
+    <p class="demo-description">
+      Each line appears 0.3s after the previous one
+    </p>
+  </div>
+  
+  <!-- Demo 5: Long Paragraph -->
+  <div class="demo-section">
+    <h2 class="demo-title">5. Long Text (Slow Reveal)</h2>
+    <p class="demo-text ink-reveal ink-reveal-slow" id="demo5">
+      Lin's argument fits especially well with Grimm Cinderella and Disney's 1950 version, 
+      where Cinderella's suffering is rewarded through marriage and recognition. 
+      The 2015 version adds emotional depth, but the story still resolves through being chosen, 
+      reinforcing the princess-as-reward structure.
+    </p>
+    <p class="demo-description">
+      Long text with slow reveal (5 seconds)
+    </p>
+  </div>
+  
+  <!-- Demo 6: Title -->
+  <div class="demo-section">
+    <h2 class="demo-title">6. Title Animation (Fast)</h2>
+    <h1 class="demo-text ink-reveal ink-reveal-fast" id="demo6" style="font-size: 2.5rem; text-align: center;">
+      ⚡ The Boy Who Lived ⚡
+    </h1>
+    <p class="demo-description">
+      Dramatic title entrance (1.5 seconds)
+    </p>
+  </div>
+  
+  <div class="reset-container">
+    <button onclick="resetAllAnimations()">🔄 Reset All Animations</button>
+  </div>
+  
+  <div style="text-align: center; margin-top: 3rem; padding: 2rem; border-top: 1px solid rgba(212, 175, 55, 0.3);">
+    <p style="color: #999; font-style: italic;">
+      "Words are, in my not-so-humble opinion, our most inexhaustible source of magic."<br>
+      — Albus Dumbledore
+    </p>
+  </div>
+  
+  <script>
+    function resetAllAnimations() {
+      // Get all elements with ink-reveal class
+      const elements = document.querySelectorAll('.ink-reveal');
+      
+      elements.forEach(el => {
+        // Force reflow by removing and re-adding class
+        el.style.animation = 'none';
+        el.offsetHeight; // Trigger reflow
+        el.style.animation = null;
+      });
+      
+      console.log('✨ All animations reset!');
+    }
+    
+    // Optional: Auto-reset every 15 seconds
+    setInterval(() => {
+      console.log('🔄 Auto-resetting animations...');
+      resetAllAnimations();
+    }, 15000);
+  </script>
+</body>
+</html>

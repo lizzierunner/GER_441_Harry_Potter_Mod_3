@@ -1,0 +1,906 @@
+/* ========================================
+   CSS VARIABLES - HARRY POTTER THEME
+   ======================================== */
+:root {
+  /* Color Palette */
+  --parchment-bg: #f4e8d0;
+  --hogwarts-dark: #0a0a0f;
+  --gold-accent: #d4af37;
+  --text-primary: #e8d4a8;
+  
+  /* Extended Palette */
+  --deep-purple: #1a0f2e;
+  --midnight-blue: #0f1729;
+  --dark-blue: #0a1628;
+  --gold-hover: #eac85f;
+  --gold-shadow: rgba(212, 175, 55, 0.4);
+  --parchment-light: #fef9e7;
+  --parchment-dark: #d4bc8e;
+}
+
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   BODY STYLES
+   ======================================== */
+body {
+  background: linear-gradient(135deg, 
+    var(--midnight-blue) 0%, 
+    var(--deep-purple) 50%, 
+    var(--dark-blue) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.font-serif {
+  font-family: 'Times New Roman', Times, Georgia, 'Crimson Text', 'Liberation Serif', serif;
+}
+
+/* Fonts */
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-crimson { font-family: 'Crimson Text', serif; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0808; 
+}
+::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
+
+/* ========================================
+   TYPOGRAPHY - HEADING EFFECTS
+   ======================================== */
+
+/* H1 and H2 Glowing Hover Effect */
+h1, h2 {
+  color: var(--gold-accent);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+  cursor: default;
+}
+
+h1:hover, h2:hover {
+  color: #fff8e1;
+  text-shadow: 
+    0 0 10px #fbbf24, 
+    0 0 20px #fbbf24,
+    0 0 30px rgba(251, 191, 36, 0.5);
+}
+
+/* ========================================
+   KEYFRAME ANIMATIONS
+   ======================================== */
+
+/* Float Animation - Gentle up and down movement */
+@keyframes float {
+  0% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-15px);
+  }
+  100% { 
+    transform: translateY(0px);
+  }
+}
+
+/* Float Slow - Slower, more subtle floating */
+@keyframes floatSlow {
+  0% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-10px);
+  }
+  100% { 
+    transform: translateY(0px);
+  }
+}
+
+/* Flicker Animation - Simulates candlelight */
+@keyframes flicker {
+  0% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  10% { 
+    opacity: 0.95;
+    transform: scale(0.98);
+  }
+  20% { 
+    opacity: 0.88;
+    transform: scale(0.96);
+  }
+  30% { 
+    opacity: 0.92;
+    transform: scale(0.97);
+  }
+  40% { 
+    opacity: 0.85;
+    transform: scale(0.95);
+  }
+  50% { 
+    opacity: 0.9;
+    transform: scale(0.96);
+  }
+  60% { 
+    opacity: 0.93;
+    transform: scale(0.98);
+  }
+  70% { 
+    opacity: 0.88;
+    transform: scale(0.95);
+  }
+  80% { 
+    opacity: 0.95;
+    transform: scale(0.97);
+  }
+  90% { 
+    opacity: 0.9;
+    transform: scale(0.96);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Flicker Subtle - More gentle candlelight effect */
+@keyframes flickerSubtle {
+  0%, 100% { 
+    opacity: 1;
+  }
+  25% { 
+    opacity: 0.95;
+  }
+  50% { 
+    opacity: 0.9;
+  }
+  75% { 
+    opacity: 0.96;
+  }
+}
+
+@keyframes sealBreak {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(10deg);
+  }
+}
+
+@keyframes blurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(0.5); opacity: 0; }
+}
+
+/* Ink Reveal Animation - Text appears as if written by quill */
+@keyframes inkReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    filter: blur(8px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.3;
+  }
+  15% {
+    filter: blur(6px);
+    opacity: 0.5;
+  }
+  30% {
+    filter: blur(4px);
+    opacity: 0.7;
+  }
+  50% {
+    filter: blur(2px);
+    opacity: 0.85;
+  }
+  70% {
+    filter: blur(1px);
+    opacity: 0.95;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Ink Reveal (Webkit fallback using mask-image) */
+@keyframes inkRevealMask {
+  0% {
+    -webkit-mask-position: -100% 0;
+    mask-position: -100% 0;
+    filter: blur(8px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.3;
+  }
+  15% {
+    filter: blur(6px);
+    opacity: 0.5;
+  }
+  30% {
+    filter: blur(4px);
+    opacity: 0.7;
+  }
+  50% {
+    filter: blur(2px);
+    opacity: 0.85;
+  }
+  70% {
+    filter: blur(1px);
+    opacity: 0.95;
+  }
+  100% {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   ANIMATION UTILITY CLASSES
+   ======================================== */
+
+/* Float animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Flicker animations - for candlelight effects */
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+.animate-flicker-subtle {
+  animation: flickerSubtle 2s ease-in-out infinite;
+}
+
+.animate-flicker-fast {
+  animation: flicker 1.5s ease-in-out infinite;
+}
+
+/* Candle flame specific class */
+.candle-flame {
+  animation: flicker 0.15s infinite alternate;
+  filter: blur(1px);
+}
+
+/* Sparkle animation */
+.sparkle-anim {
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+/* Ink Reveal - Text appears as if written by invisible quill */
+.ink-reveal {
+  display: inline-block;
+  animation: inkReveal 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  clip-path: inset(0 100% 0 0);
+  filter: blur(8px);
+  opacity: 0;
+  transform-origin: left center;
+}
+
+/* Ink Reveal with mask-image support (for better browser compatibility) */
+@supports (mask-image: linear-gradient(to right, black, black)) or 
+          (-webkit-mask-image: linear-gradient(to right, black, black)) {
+  .ink-reveal {
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 100%);
+    mask-image: linear-gradient(to right, black 0%, black 100%);
+    -webkit-mask-size: 200% 100%;
+    mask-size: 200% 100%;
+    -webkit-mask-position: -100% 0;
+    mask-position: -100% 0;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: inkRevealMask 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    clip-path: none;
+  }
+}
+
+/* Ink Reveal variants with different speeds */
+.ink-reveal-fast {
+  animation-duration: 1.5s;
+}
+
+.ink-reveal-slow {
+  animation-duration: 5s;
+}
+
+.ink-reveal-delay-1 {
+  animation-delay: 0.3s;
+}
+
+.ink-reveal-delay-2 {
+  animation-delay: 0.6s;
+}
+
+.ink-reveal-delay-3 {
+  animation-delay: 0.9s;
+}
+
+/* Ink droplet effect (optional enhancement) */
+.ink-reveal::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.8), transparent);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  animation: inkDroplet 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes inkDroplet {
+  0% {
+    left: 0;
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1.2);
+  }
+  95% {
+    left: 100%;
+    opacity: 0.4;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+}
+
+/* ========================================
+   WAX SEAL BUTTON STYLES
+   ======================================== */
+.wax-seal-button {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: none;
+  background: radial-gradient(circle, #8B0000 0%, #660000 50%, #4a0000 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(139, 0, 0, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 20px auto;
+  display: block;
+}
+
+.wax-seal-button:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    0 12px 24px rgba(139, 0, 0, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+.wax-seal-button:active {
+  transform: scale(0.98);
+}
+
+.wax-seal-button.breaking {
+  animation: sealBreak 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+.seal-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #d4af37;
+}
+
+.seal-icon {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.seal-text {
+  position: absolute;
+  bottom: -30px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'Cinzel', serif;
+}
+
+/* Answer reveal animation */
+.answer-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(10px);
+}
+
+.answer-reveal.revealed {
+  animation: blurIn 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.candle-flame {
+  animation: flicker 0.1s infinite alternate;
+}
+
+.sparkle-anim {
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+/* Transitions */
+.slide-enter {
+  opacity: 0;
+  transform: scale(0.95);
+  filter: blur(5px);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+}
+
+.slide-exit {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transform: scale(1.05);
+  filter: blur(5px);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in, filter 0.5s ease-in;
+}
+
+/* Pensieve Swirl Transition - Diving into Memory */
+.pensieve-swirl-exit {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0) hue-rotate(0deg);
+}
+
+.pensieve-swirl-exit-active {
+  opacity: 0;
+  transform: scale(1.15);
+  filter: blur(10px) hue-rotate(90deg);
+  transition: opacity 0.7s ease-in, 
+              transform 0.7s ease-in, 
+              filter 0.7s ease-in;
+}
+
+.pensieve-swirl-enter {
+  opacity: 0;
+  transform: scale(1.15);
+  filter: blur(10px) hue-rotate(-90deg);
+}
+
+.pensieve-swirl-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0) hue-rotate(0deg);
+  transition: opacity 0.7s ease-out, 
+              transform 0.7s ease-out, 
+              filter 0.7s ease-out;
+}
+
+/* ========================================
+   FLOATING CANDLES
+   ======================================== */
+
+.floating-candle {
+  pointer-events: none;
+  z-index: 15;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.candle-body {
+  position: relative;
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(to bottom, #f5f5dc 0%, #e8dcc0 50%, #d4c5a0 100%);
+  border-radius: 2px;
+  box-shadow: 
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.candle-body::before {
+  /* Wax drip effect */
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 3px;
+  background: #f5f5dc;
+  border-radius: 50%;
+}
+
+.candle-flame {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    #ffffff 0%,
+    #ffff00 15%,
+    #ffaa00 30%,
+    #ff6600 50%,
+    rgba(255, 102, 0, 0.5) 70%,
+    rgba(255, 102, 0, 0) 100%
+  );
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    0 0 10px rgba(255, 165, 0, 0.8),
+    0 0 20px rgba(255, 140, 0, 0.6),
+    0 0 30px rgba(255, 100, 0, 0.4);
+  filter: blur(1px);
+}
+
+/* Different candle sizes for variety */
+.floating-candle:nth-child(2) .candle-body {
+  height: 45px;
+  width: 9px;
+}
+
+.floating-candle:nth-child(3) .candle-body {
+  height: 35px;
+  width: 7px;
+}
+
+.floating-candle:nth-child(4) .candle-body {
+  height: 50px;
+  width: 10px;
+}
+
+.floating-candle:nth-child(5) .candle-body {
+  height: 38px;
+  width: 8px;
+}
+
+/* ========================================
+   GOLDEN SNITCH
+   ======================================== */
+
+/* Snitch container and element */
+.golden-snitch {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transition: all 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Snitch ball (body) */
+.snitch-ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, 
+    #ffd700 0%, 
+    #ffed4e 30%, 
+    #daa520 60%, 
+    #b8860b 100%
+  );
+  border-radius: 50%;
+  box-shadow: 
+    inset -3px -3px 6px rgba(184, 134, 11, 0.8),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    0 0 15px rgba(255, 215, 0, 0.8),
+    0 0 25px rgba(255, 215, 0, 0.4);
+  animation: snitchGlow 2s ease-in-out infinite;
+}
+
+/* Snitch details/pattern */
+.snitch-ball::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(184, 134, 11, 0.6);
+  border-radius: 50%;
+}
+
+.snitch-ball::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: rgba(184, 134, 11, 0.4);
+}
+
+/* Left wing */
+.snitch-wing-left {
+  position: absolute;
+  width: 20px;
+  height: 8px;
+  top: 50%;
+  left: -12px;
+  transform: translateY(-50%);
+  transform-origin: right center;
+  animation: wingFlutterLeft 0.15s ease-in-out infinite;
+}
+
+/* Right wing */
+.snitch-wing-right {
+  position: absolute;
+  width: 20px;
+  height: 8px;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%) scaleX(-1);
+  transform-origin: left center;
+  animation: wingFlutterRight 0.15s ease-in-out infinite;
+}
+
+/* Wing feather structure */
+.wing-feather {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(230, 230, 230, 0.8) 40%,
+    rgba(200, 200, 200, 0.6) 70%,
+    rgba(180, 180, 180, 0.3) 100%
+  );
+  clip-path: polygon(
+    0% 50%,
+    10% 20%,
+    30% 5%,
+    60% 0%,
+    100% 10%,
+    95% 50%,
+    100% 90%,
+    60% 100%,
+    30% 95%,
+    10% 80%
+  );
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Wing detail lines */
+.wing-feather::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(150, 150, 150, 0.6) 0%,
+    rgba(150, 150, 150, 0.3) 50%,
+    rgba(150, 150, 150, 0) 100%
+  );
+  transform: translateY(-50%);
+}
+
+/* Wing flutter animations */
+@keyframes wingFlutterLeft {
+  0%, 100% {
+    transform: translateY(-50%) rotateY(0deg) rotateZ(-5deg);
+  }
+  50% {
+    transform: translateY(-50%) rotateY(-25deg) rotateZ(-15deg);
+  }
+}
+
+@keyframes wingFlutterRight {
+  0%, 100% {
+    transform: translateY(-50%) scaleX(-1) rotateY(0deg) rotateZ(-5deg);
+  }
+  50% {
+    transform: translateY(-50%) scaleX(-1) rotateY(-25deg) rotateZ(-15deg);
+  }
+}
+
+/* Snitch glow pulse */
+@keyframes snitchGlow {
+  0%, 100% {
+    box-shadow: 
+      inset -3px -3px 6px rgba(184, 134, 11, 0.8),
+      inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+      0 0 15px rgba(255, 215, 0, 0.8),
+      0 0 25px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 
+      inset -3px -3px 6px rgba(184, 134, 11, 0.8),
+      inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+      0 0 20px rgba(255, 215, 0, 1),
+      0 0 35px rgba(255, 215, 0, 0.6);
+  }
+}
+
+/* ========================================
+   MAGICAL FOOTPRINTS
+   ======================================== */
+
+/* Footprint element */
+.magical-footprint {
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  pointer-events: none;
+  opacity: 0;
+  animation: footprintAppear 1s ease-out forwards;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Footprint appearance animation */
+@keyframes footprintAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Footprint fade after appearing */
+.magical-footprint.fading {
+  animation: footprintFade 2s ease-out forwards;
+}
+
+@keyframes footprintFade {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* Footprint SVG styling */
+.footprint-svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(212, 175, 55, 0.6);
+  stroke: rgba(212, 175, 55, 0.8);
+  stroke-width: 0.5;
+}
+
+/* Shimmer effect on footprints */
+.magical-footprint::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+    #background, #app, #wand-cursor, .fixed {
+        display: none !important;
+    }
+    .print\:block {
+        display: block !important;
+        position: static !important;
+    }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter & Gender Themes - Module 3</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        crimson: ['"Crimson Text"', 'serif'],
+                    },
+                    colors: {
+                        yellow: {
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            900: '#713f12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-[#d4af37] overflow-hidden w-screen h-screen cursor-none">
+
+    <!-- Background Layer -->
+    <div id="bg-layer" class="fixed inset-0 z-0">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 opacity-40 mix-blend-soft-light bg-[url('https://images.unsplash.com/photo-1547756536-cde3673fa2e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920')] bg-cover bg-center sepia contrast-125"></div>
+        
+        <!-- Parchment Texture -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none z-0 mix-blend-overlay bg-[url('https://images.unsplash.com/photo-1690983331198-b32a245b13cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080')] bg-cover bg-center"></div>
+
+        <!-- Vignette -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.4)_50%,_#000000_100%)] z-0 pointer-events-none"></div>
+
+        <!-- Fog -->
+        <div class="fog-container absolute bottom-0 left-0 w-[200%] h-1/3 bg-gradient-to-t from-[#1a1a1a]/80 to-transparent z-10 opacity-30 pointer-events-none"></div>
+
+        <!-- Containers for dynamic elements -->
+        <div id="sparkles-container" class="absolute inset-0 pointer-events-none z-10"></div>
+        <div id="candles-container" class="absolute inset-0 pointer-events-none z-10"></div>
+        <div id="snitch-container" class="absolute inset-0 pointer-events-none z-50"></div>
+        <div id="footprints-container" class="absolute inset-0 pointer-events-none z-0"></div>
+        
+        <!-- House Banners -->
+        <div class="house-banners">
+            <div class="banner top-left gryffindor opacity-40 mix-blend-screen absolute top-10 left-10"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAsMjAgUTUwLDUgODAsMjAgUTkwLDUwIDgwLDgwIFE1MCw5NSAyMCw4MCBRMTAsNTAgMjAsMjAgWiIgZmlsbD0iIzc0MDAwMSIgLz48cGF0aCBkPSJNMzAsMzAgTDcwLDMwIEw2MCw3MCBMNDAsNzAgWiIgZmlsbD0iI2VlYmEzMCIgLz48L3N2Zz4=" class="w-24 h-32 opacity-80" /></div>
+            <div class="banner top-right slytherin opacity-40 mix-blend-screen absolute top-10 right-10"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAsMjAgUTUwLDUgODAsMjAgUTkwLDUwIDgwLDgwIFE1MCw5NSAyMCw4MCBRMTAsNTAgMjAsMjAgWiIgZmlsbD0iIzFhNDcyYSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYWFhYWFhIiBzdHJva2Utd2lkdGg9IjUiIC8+PC9zdmc+" class="w-24 h-32 opacity-80" /></div>
+            <div class="banner bottom-left ravenclaw opacity-40 mix-blend-screen absolute bottom-10 left-10"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAsMjAgUTUwLDUgODAsMjAgUTkwLDUwIDgwLDgwIFE1MCw5NSAyMCw4MCBRMTAsNTAgMjAsMjAgWiIgZmlsbD0iIzBlMWE0MCIgLz48cGF0aCBkPSJNMzAsNTAgTDUwLDMwIEw3MCw1MCBMNTAsNzAgWiIgZmlsbD0iIzk0NmIyZCIgLz48L3N2Zz4=" class="w-24 h-32 opacity-80" /></div>
+            <div class="banner bottom-right hufflepuff opacity-40 mix-blend-screen absolute bottom-10 right-10"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAsMjAgUTUwLDUgODAsMjAgUTkwLDUwIDgwLDgwIFE1MCw5NSAyMCw4MCBRMTAsNTAgMjAsMjAgWiIgZmlsbD0iI2VjYjkzOSIgLz48cmVjdCB4PSIzNSIgeT0iMzUiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjUiIGZpbGw9IiMwMDAwMDAiIC8+PC9zdmc+" class="w-24 h-32 opacity-80" /></div>
+        </div>
+    </div>
+
+    <!-- Magic Canvas for Cursor Effects -->
+    <canvas id="magic-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-30"></canvas>
+
+    <!-- Main App Container -->
+    <main id="app" class="relative z-20 w-full h-full flex flex-col">
+        <!-- Slide Container -->
+        <div id="slide-container" class="flex-1 relative flex items-center justify-center overflow-hidden p-8 md:p-16">
+            <!-- Dynamic Slide Content injected here -->
+        </div>
+
+        <!-- UI Layer - Navigation Controls -->
+        <div class="absolute bottom-0 left-0 w-full p-6 flex justify-between items-center z-50 bg-gradient-to-t from-black/80 to-transparent">
+            
+            <!-- Progress Indicator -->
+            <div class="flex flex-col items-center">
+                <div id="page-indicator" class="text-yellow-500/80 font-cinzel text-sm mb-1">Page 1 of 7</div>
+                <div class="w-32 h-1 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-yellow-600 to-yellow-300 w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex space-x-4">
+                <button id="prev-btn" class="p-3 rounded-full border border-yellow-700/50 bg-black/40 text-yellow-500 hover:bg-yellow-900/30 hover:border-yellow-500 hover:scale-110 transition-all disabled:opacity-30 cursor-pointer" aria-label="Previous slide">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button id="next-btn" class="p-3 rounded-full border border-yellow-700/50 bg-black/40 text-yellow-500 hover:bg-yellow-900/30 hover:border-yellow-500 hover:scale-110 transition-all disabled:opacity-30 cursor-pointer" aria-label="Next slide">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Share/Print Button -->
+    <div class="fixed top-6 left-6 z-[60] flex flex-col gap-4">
+         <button onclick="shareLink()" class="w-12 h-12 rounded-full flex items-center justify-center bg-black/60 border-2 border-yellow-700/50 text-yellow-500 hover:border-yellow-400 hover:text-yellow-200 hover:bg-yellow-900/20 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all cursor-pointer backdrop-blur-sm" title="Share Link">
+            <i data-lucide="share-2" class="w-5 h-5"></i>
+         </button>
+         <button onclick="window.print()" class="w-12 h-12 rounded-full flex items-center justify-center bg-black/60 border-2 border-yellow-700/50 text-yellow-500 hover:border-yellow-400 hover:text-yellow-200 hover:bg-yellow-900/20 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all cursor-pointer backdrop-blur-sm" title="Print / PDF">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+         </button>
+    </div>
+
+    <!-- Cursor -->
+    <div id="wand-cursor" class="fixed pointer-events-none z-[100] w-8 h-8 opacity-0 md:opacity-100 transition-opacity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full text-yellow-200 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] rotate-12">
+            <path d="M14.5 4l-10.5 16" stroke-linecap="round"/>
+            <path d="M14 3l7 7" stroke-linecap="round"/>
+            <path d="M16 8l-2-2"/>
+        </svg>
+    </div>
+
+    <!-- Print Only Section -->
+    <div class="hidden print:block fixed inset-0 bg-white z-[9999] p-12 text-black overflow-y-auto">
+        <div class="max-w-4xl mx-auto" id="print-content">
+            <h1 class="text-4xl font-serif font-bold mb-2 text-center">GER 441 Module 3: Study Guide</h1>
+            <h2 class="text-2xl font-serif mb-8 text-center text-gray-700">Harry Potter, Fairy Tales, and Gender</h2>
+            <div class="w-full h-px bg-black mb-8"></div>
+            <div id="print-questions-container" class="space-y-8">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-black/90 border border-yellow-500/50 text-yellow-400 px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-[200] font-cinzel">
+        Magical link copied!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
