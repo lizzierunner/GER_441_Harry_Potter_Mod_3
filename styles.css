@@ -882,6 +882,31 @@ h1:hover, h2:hover {
   }
 }
 
+/* Mischief Managed Title Glow Pulse */
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 40px rgba(212, 175, 55, 0.8),
+      0 0 80px rgba(212, 175, 55, 0.4),
+      0 0 120px rgba(212, 175, 55, 0.2);
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 
+      0 0 50px rgba(212, 175, 55, 1),
+      0 0 100px rgba(212, 175, 55, 0.6),
+      0 0 150px rgba(212, 175, 55, 0.3),
+      0 0 200px rgba(212, 175, 55, 0.2);
+    filter: brightness(1.2);
+    transform: scale(1.02);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
 /* ========================================
    MAGICAL FOOTPRINTS
    ======================================== */
@@ -925,6 +950,22 @@ h1:hover, h2:hover {
   100% {
     opacity: 0.15;
   }
+}
+
+/* Fade in animation for Mischief Managed slide */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.5s ease-out forwards;
 }
 
 /* Footprint SVG styling */

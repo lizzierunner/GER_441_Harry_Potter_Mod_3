@@ -175,14 +175,14 @@ function renderSlide(index) {
         `;
     } else if (isConclusion) {
          contentHtml = `
-            <div class="flex flex-col items-center justify-center text-center slide-enter slide-enter-active">
-                <div class="text-xl md:text-2xl font-cinzel text-yellow-600/80 mb-4 tracking-widest uppercase">I solemnly swear I am up to no good</div>
-                <h1 id="mischief-title" class="text-6xl md:text-9xl font-bold mb-8 font-cinzel text-[#d4af37] drop-shadow-[0_0_20px_rgba(212,175,55,0.4)] tracking-widest uppercase italic" style="font-family: 'Cinzel Decorative', serif;">
+            <div class="flex flex-col items-center justify-center text-center slide-enter slide-enter-active h-full">
+                <div class="text-xl md:text-2xl font-cinzel text-yellow-600/80 mb-8 tracking-widest uppercase animate-fade-in">I solemnly swear I am up to no good</div>
+                <h1 id="mischief-title" class="text-7xl md:text-[12rem] lg:text-[14rem] font-bold font-cinzel text-transparent bg-clip-text bg-gradient-to-b from-[#d4af37] via-[#f4d03f] to-[#d4af37] drop-shadow-[0_0_30px_rgba(212,175,55,0.6)] tracking-widest uppercase italic animate-glow-pulse" style="font-family: 'Cinzel Decorative', serif; text-shadow: 0 0 40px rgba(212,175,55,0.8), 0 0 80px rgba(212,175,55,0.4), 0 0 120px rgba(212,175,55,0.2);">
                     ${slide.title}
                 </h1>
-                <div class="h-px bg-gradient-to-r from-transparent via-yellow-700 to-transparent w-full mx-auto mb-8"></div>
-                <button id="mischief-managed-btn" class="mt-8 px-8 py-4 bg-transparent border-2 border-yellow-600/50 text-yellow-600 font-cinzel text-2xl rounded-lg hover:bg-yellow-600/10 hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-                    Mischief Managed
+                <div class="h-1 bg-gradient-to-r from-transparent via-yellow-600 to-transparent w-3/4 mx-auto mt-8 animate-pulse"></div>
+                <button id="mischief-managed-btn" class="mt-16 px-12 py-5 bg-transparent border-2 border-yellow-600/50 text-yellow-600/80 font-cinzel text-lg rounded-lg hover:bg-yellow-600/10 hover:border-yellow-500 hover:text-yellow-500 transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:scale-105">
+                    ✨ Tap to Reveal Magic ✨
                 </button>
             </div>
         `;
