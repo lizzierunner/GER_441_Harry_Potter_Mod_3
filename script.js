@@ -120,6 +120,7 @@ function init() {
     setupBackground();
     setupCursor();
     setupParallax();
+    setupSpectacularEffects();
     renderPrintContent();
     lucide.createIcons();
 }
@@ -746,6 +747,303 @@ function endNoxMode() {
         if (el) {
             el.style.display = '';
         }
+    });
+}
+
+// --- SPECTACULAR HARRY POTTER FEATURES ---
+
+let housePoints = 0;
+let lumosActive = false;
+
+function setupSpectacularEffects() {
+    setupLumosButton();
+    setupPatronusButton();
+    setupProphecyOrbs();
+    setupGoldenSnitch();
+    setupFlooPowderTransition();
+    setupHousePoints();
+    setupScreenShake();
+}
+
+// --- LUMOS/NOX Toggle ---
+function setupLumosButton() {
+    const lumosBtn = document.getElementById('lumos-btn');
+    const body = document.body;
+    
+    if (!lumosBtn) return;
+    
+    lumosBtn.addEventListener('click', () => {
+        lumosActive = !lumosActive;
+        
+        if (lumosActive) {
+            // Lumos - brighten everything
+            body.style.filter = 'brightness(1.3) saturate(1.2)';
+            lumosBtn.innerHTML = `
+                <i data-lucide="lightbulb-off" class="w-4 h-4"></i>
+                <span>Nox</span>
+            `;
+            lumosBtn.classList.add('!text-yellow-300', '!border-yellow-400', '!bg-yellow-900/30');
+            
+            // Add glow effect
+            createLumosGlow();
+            awardHousePoints(5, "Cast Lumos!");
+        } else {
+            // Nox - return to normal
+            body.style.filter = '';
+            lumosBtn.innerHTML = `
+                <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                <span>Lumos</span>
+            `;
+            lumosBtn.classList.remove('!text-yellow-300', '!border-yellow-400', '!bg-yellow-900/30');
+            
+            removeLumosGlow();
+        }
+        lucide.createIcons();
+    });
+}
+
+function createLumosGlow() {
+    const glow = document.createElement('div');
+    glow.id = 'lumos-glow';
+    glow.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(255, 255, 200, 0.3) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 9999;
+        animation: lumosGlow 2s ease-in-out infinite;
+    `;
+    document.body.appendChild(glow);
+}
+
+function removeLumosGlow() {
+    const glow = document.getElementById('lumos-glow');
+    if (glow) glow.remove();
+}
+
+// --- PATRONUS EFFECT ---
+function setupPatronusButton() {
+    const patronusBtn = document.getElementById('patronus-btn');
+    
+    if (!patronusBtn) return;
+    
+    patronusBtn.addEventListener('click', () => {
+        spawnPatronus();
+        awardHousePoints(10, "Expecto Patronum!");
+        
+        // Disable button briefly
+        patronusBtn.disabled = true;
+        setTimeout(() => {
+            patronusBtn.disabled = false;
+        }, 5000);
+    });
+}
+
+function spawnPatronus() {
+    const container = document.getElementById('patronus-container');
+    if (!container) return;
+    
+    const patronus = document.createElement('div');
+    patronus.className = 'patronus';
+    
+    // Random animal shapes
+    const animals = ['🦌', '🐴', '🦊', '🦅', '🐺', '🦁', '🐈'];
+    const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+    
+    const startX = Math.random() * 100;
+    const startY = Math.random() * 100;
+    
+    patronus.style.cssText = `
+        position: absolute;
+        left: ${startX}%;
+        top: ${startY}%;
+        font-size: 60px;
+        filter: brightness(2) blur(1px) drop-shadow(0 0 20px rgba(200, 220, 255, 0.8));
+        opacity: 0.8;
+        animation: patronusFloat 8s ease-in-out forwards;
+        pointer-events: none;
+        z-index: 100;
+    `;
+    patronus.textContent = randomAnimal;
+    
+    container.appendChild(patronus);
+    
+    // Remove after animation
+    setTimeout(() => {
+        patronus.remove();
+    }, 8000);
+}
+
+// --- PROPHECY ORBS ---
+function setupProphecyOrbs() {
+    const container = document.getElementById('prophecy-orbs-container');
+    if (!container) return;
+    
+    // Create 5 floating prophecy orbs
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            createProphecyOrb();
+        }, i * 2000);
+    }
+}
+
+function createProphecyOrb() {
+    const container = document.getElementById('prophecy-orbs-container');
+    if (!container) return;
+    
+    const orb = document.createElement('div');
+    const x = 10 + Math.random() * 80;
+    const y = 10 + Math.random() * 80;
+    
+    orb.style.cssText = `
+        position: absolute;
+        left: ${x}%;
+        top: ${y}%;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle at 30% 30%, rgba(200, 220, 255, 0.8), rgba(100, 150, 255, 0.3));
+        border-radius: 50%;
+        filter: blur(2px) drop-shadow(0 0 15px rgba(150, 180, 255, 0.6));
+        animation: orbFloat 4s ease-in-out infinite, orbPulse 2s ease-in-out infinite;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 50;
+    `;
+    
+    orb.addEventListener('click', () => {
+        // Orb shatters on click
+        orb.style.animation = 'orbShatter 0.5s ease-out forwards';
+        awardHousePoints(15, "Prophecy Revealed!");
+        setTimeout(() => orb.remove(), 500);
+    });
+    
+    container.appendChild(orb);
+}
+
+// --- FLOO POWDER TRANSITION ---
+function setupFlooPowderTransition() {
+    const flooEffect = document.getElementById('floo-powder-effect');
+    if (!flooEffect) return;
+    
+    // Set up green flames effect
+    flooEffect.style.background = `
+        radial-gradient(ellipse at center, 
+            rgba(0, 255, 100, 0.6) 0%, 
+            rgba(0, 200, 80, 0.4) 20%,
+            rgba(0, 150, 60, 0.2) 40%,
+            transparent 70%
+        )
+    `;
+}
+
+function triggerFlooPowder() {
+    const flooEffect = document.getElementById('floo-powder-effect');
+    if (!flooEffect) return;
+    
+    flooEffect.style.opacity = '1';
+    setTimeout(() => {
+        flooEffect.style.opacity = '0';
+    }, 1000);
+}
+
+// --- HOUSE POINTS SYSTEM ---
+function setupHousePoints() {
+    // Show house points display
+    const display = document.getElementById('house-points');
+    if (display) {
+        setTimeout(() => {
+            display.style.opacity = '1';
+        }, 1000);
+    }
+}
+
+function awardHousePoints(points, reason) {
+    housePoints += points;
+    const pointsValue = document.getElementById('points-value');
+    
+    if (pointsValue) {
+        // Animate points
+        pointsValue.style.transform = 'scale(1.5)';
+        pointsValue.textContent = housePoints;
+        
+        setTimeout(() => {
+            pointsValue.style.transform = 'scale(1)';
+        }, 300);
+    }
+    
+    // Show notification
+    showNotification(`+${points} points! ${reason}`);
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: rgba(0, 0, 0, 0.9);
+        color: #eab308;
+        padding: 20px 40px;
+        border: 2px solid #d4af37;
+        border-radius: 10px;
+        font-family: 'Cinzel', serif;
+        font-size: 20px;
+        z-index: 10000;
+        pointer-events: none;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        animation: notificationPop 2s ease-out forwards;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 2000);
+}
+
+// --- SCREEN SHAKE (Howler Effect) ---
+function setupScreenShake() {
+    // Trigger on certain events
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'h' || e.key === 'H') {
+            triggerHowler();
+        }
+    });
+}
+
+function triggerHowler() {
+    const main = document.getElementById('main-content');
+    if (!main) return;
+    
+    main.style.animation = 'shake 0.5s ease-in-out';
+    showNotification("HOWLER RECEIVED!");
+    
+    setTimeout(() => {
+        main.style.animation = '';
+    }, 500);
+}
+
+// --- ENHANCED GOLDEN SNITCH WITH CATCH GAME ---
+function setupGoldenSnitch() {
+    const snitch = createGoldenSnitch();
+    if (!snitch) return;
+    
+    snitch.style.cursor = 'pointer';
+    snitch.addEventListener('click', () => {
+        // Snitch caught!
+        snitch.style.animation = 'snitchCaught 1s ease-out forwards';
+        awardHousePoints(150, "GOLDEN SNITCH CAUGHT!");
+        
+        setTimeout(() => {
+            snitch.remove();
+            // Respawn after delay
+            setTimeout(setupGoldenSnitch, 10000);
+        }, 1000);
     });
 }
 

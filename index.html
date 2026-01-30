@@ -60,6 +60,9 @@
         <div id="candles-container" class="absolute inset-0 pointer-events-none z-10"></div>
         <div id="snitch-container" class="absolute inset-0 pointer-events-none z-50"></div>
         <div id="footprints-container" class="absolute inset-0 pointer-events-none z-0"></div>
+        <div id="patronus-container" class="absolute inset-0 pointer-events-none z-20"></div>
+        <div id="prophecy-orbs-container" class="absolute inset-0 pointer-events-none z-15"></div>
+        <div id="floo-powder-effect" class="absolute inset-0 pointer-events-none z-[9998] opacity-0 transition-opacity duration-1000"></div>
         
         <!-- House Banners -->
         <div class="house-banners">
@@ -111,6 +114,29 @@
          <button onclick="window.print()" class="w-12 h-12 rounded-full flex items-center justify-center bg-black/60 border-2 border-yellow-700/50 text-yellow-500 hover:border-yellow-400 hover:text-yellow-200 hover:bg-yellow-900/20 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all cursor-pointer backdrop-blur-sm" title="Print / PDF">
             <i data-lucide="file-text" class="w-5 h-5"></i>
          </button>
+    </div>
+    
+    <!-- House Points Display -->
+    <div id="house-points" class="fixed top-6 right-6 z-[60] bg-black/80 border-2 border-yellow-700/50 rounded-lg p-3 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="font-cinzel text-yellow-500 text-xs mb-1">House Points</div>
+        <div class="flex items-center gap-2">
+            <span id="points-value" class="text-2xl font-bold text-yellow-400">0</span>
+            <svg class="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Magic Controls -->
+    <div class="fixed bottom-6 right-6 z-[60] flex flex-col gap-3">
+        <button id="lumos-btn" class="px-4 py-2 bg-black/60 border-2 border-yellow-700/50 text-yellow-500 rounded-lg hover:bg-yellow-900/20 hover:border-yellow-400 transition-all font-cinzel backdrop-blur-sm flex items-center gap-2 text-sm">
+            <i data-lucide="lightbulb" class="w-4 h-4"></i>
+            <span>Lumos</span>
+        </button>
+        <button id="patronus-btn" class="px-4 py-2 bg-black/60 border-2 border-blue-700/50 text-blue-400 rounded-lg hover:bg-blue-900/20 hover:border-blue-400 transition-all font-cinzel backdrop-blur-sm flex items-center gap-2 text-sm">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Patronus</span>
+        </button>
     </div>
 
     <!-- Cursor -->
