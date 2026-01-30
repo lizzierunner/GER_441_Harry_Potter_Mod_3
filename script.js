@@ -87,6 +87,54 @@ const slides = [
     ]
   },
   {
+    id: 'q6',
+    title: 'Question 6: Identity & Belonging',
+    layout: 'standard',
+    content: [
+      {
+        type: 'quiz',
+        quizItems: [
+          {
+            question: 'How does the movie show Harry trying to figure out who he is, and how does Hogwarts help him feel he belongs?',
+            answer: 'The film shows Harry\'s identity crisis through his life with the Dursleys, where he feels unwanted and ordinary. Hogwarts transforms this by revealing his magical heritage and famous past. Through the Sorting Hat ceremony, friendships with Ron and Hermione, and discovering his parents\' legacy, Harry finds belonging in a community that values him. The school becomes the home he never had, where his identity as "the boy who lived" evolves into simply being Harry—a brave, loyal friend who belongs to Gryffindor.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'q7',
+    title: 'Question 7: Types of Power',
+    layout: 'standard',
+    content: [
+      {
+        type: 'quiz',
+        quizItems: [
+          {
+            question: 'How do characters like Dumbledore, Snape, and Voldemort show different types of power in the movie?',
+            answer: 'The film presents three distinct forms of power: Dumbledore embodies wisdom and benevolent authority, using his power to guide and protect rather than control. His strength lies in trust and restraint. Voldemort represents raw, destructive power driven by fear and the desire for immortality—power without moral boundaries. Snape demonstrates the power of deception and complexity, operating in the shadows with ambiguous loyalties. While Voldemort seeks power through domination and Dumbledore through compassion, Snape\'s power comes from secrecy and the ability to serve multiple masters, showing that power can be subtle and layered.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'q8',
+    title: 'Question 8: Harry as Classic Hero',
+    layout: 'standard',
+    content: [
+      {
+        type: 'quiz',
+        quizItems: [
+          {
+            question: 'How is Harry like a classic hero from a fairy tale?',
+            answer: 'Harry follows the archetypal hero\'s journey found in classic fairy tales: he begins as an orphan in humble, oppressive circumstances (like Cinderella or Snow White), receives a magical call to adventure (the Hogwarts letter), gains supernatural aid (his wand, Hagrid\'s guidance), faces tests and trials (the challenges protecting the Stone), and ultimately confronts the villain to restore balance. Like traditional fairy tale heroes, Harry possesses inherent special qualities (his magical ability, fame, and the protection of his mother\'s love) that mark him as "chosen." However, unlike passive fairy tale princesses, Harry actively pursues his destiny, making him a hero in the classic adventurer tradition rather than the romantic reward structure.'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'conclusion',
     title: 'Mischief Managed',
     layout: 'center',
