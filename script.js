@@ -176,10 +176,13 @@ function renderSlide(index) {
          contentHtml = `
             <div class="flex flex-col items-center justify-center text-center slide-enter slide-enter-active">
                 <div class="text-xl md:text-2xl font-cinzel text-yellow-600/80 mb-4 tracking-widest uppercase">I solemnly swear I am up to no good</div>
-                <h1 class="text-6xl md:text-9xl font-bold mb-8 font-cinzel text-[#d4af37] drop-shadow-[0_0_20px_rgba(212,175,55,0.4)] tracking-widest uppercase italic" style="font-family: 'Cinzel Decorative', serif;">
+                <h1 id="mischief-title" class="text-6xl md:text-9xl font-bold mb-8 font-cinzel text-[#d4af37] drop-shadow-[0_0_20px_rgba(212,175,55,0.4)] tracking-widest uppercase italic" style="font-family: 'Cinzel Decorative', serif;">
                     ${slide.title}
                 </h1>
                 <div class="h-px bg-gradient-to-r from-transparent via-yellow-700 to-transparent w-full mx-auto mb-8"></div>
+                <button id="mischief-managed-btn" class="mt-8 px-8 py-4 bg-transparent border-2 border-yellow-600/50 text-yellow-600 font-cinzel text-2xl rounded-lg hover:bg-yellow-600/10 hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    Mischief Managed
+                </button>
             </div>
         `;
     } else {
@@ -223,6 +226,11 @@ function renderSlide(index) {
 
     container.innerHTML = contentHtml;
     lucide.createIcons();
+    
+    // Setup Mischief Managed button if on conclusion slide
+    if (isConclusion) {
+        setupMischiefManagedButton();
+    }
 }
 
 function renderPrintContent() {
@@ -247,6 +255,111 @@ function renderPrintContent() {
         });
     });
     printContainer.innerHTML = html;
+}
+
+// --- Mischief Managed Button ---
+
+function setupMischiefManagedButton() {
+    const btn = document.getElementById('mischief-managed-btn');
+    const title = document.getElementById('mischief-title');
+    
+    if (!btn || !title) return;
+    
+    btn.addEventListener('click', () => {
+        // Disable button to prevent multiple clicks
+        btn.disabled = true;
+        btn.style.pointerEvents = 'none';
+        
+        // 1. Spawn trailing footprints walking off screen
+        spawnExitFootprints();
+        
+        // 2. Fade out the "Mischief Managed" text like evaporating ink
+        title.style.transition = 'opacity 2.5s ease-out, filter 2.5s ease-out, transform 2.5s ease-out';
+        title.style.opacity = '0';
+        title.style.filter = 'blur(3px)';
+        title.style.transform = 'scale(1.05)';
+        
+        // Also fade out the button
+        btn.style.transition = 'opacity 1.5s ease-out';
+        btn.style.opacity = '0';
+        
+        // 3. After 3 seconds, trigger Nox Mode
+        setTimeout(() => {
+            startNoxMode();
+        }, 3000);
+    });
+}
+
+function spawnExitFootprints() {
+    const footprintsContainer = document.getElementById('footprints-container');
+    if (!footprintsContainer) return;
+    
+    // Create footprints that walk from center to off-screen (right side)
+    const footprintPath = [
+        { x: 50, y: 55, isLeft: true, rotation: 15 },
+        { x: 53, y: 58, isLeft: false, rotation: 10 },
+        { x: 56, y: 60, isLeft: true, rotation: 12 },
+        { x: 59, y: 63, isLeft: false, rotation: 8 },
+        { x: 62, y: 65, isLeft: true, rotation: 10 },
+        { x: 66, y: 68, isLeft: false, rotation: 15 },
+        { x: 70, y: 70, isLeft: true, rotation: 12 },
+        { x: 74, y: 72, isLeft: false, rotation: 10 },
+        { x: 78, y: 75, isLeft: true, rotation: 8 },
+        { x: 83, y: 77, isLeft: false, rotation: 12 },
+        { x: 88, y: 78, isLeft: true, rotation: 10 },
+        { x: 93, y: 80, isLeft: false, rotation: 15 },
+        { x: 98, y: 82, isLeft: true, rotation: 12 },
+        { x: 103, y: 83, isLeft: false, rotation: 10 } // Off screen
+    ];
+    
+    footprintPath.forEach((step, index) => {
+        setTimeout(() => {
+            createFootprint(step.x, step.y, step.isLeft, step.rotation);
+        }, index * 250); // Spawn every 250ms
+    });
+}
+
+function createFootprint(x, y, isLeft, rotation = 0) {
+    const footprintsContainer = document.getElementById('footprints-container');
+    if (!footprintsContainer) return;
+    
+    const footprint = document.createElement('div');
+    footprint.className = 'footprint';
+    footprint.style.cssText = `
+        position: absolute;
+        left: ${x}%;
+        top: ${y}%;
+        width: 40px;
+        height: 50px;
+        opacity: 0;
+        transform: rotate(${rotation}deg);
+        pointer-events: none;
+        animation: footprintAppear 1s ease-out forwards, footprintFade 2s ease-out 1s forwards;
+    `;
+    
+    // Create SVG footprint
+    footprint.innerHTML = `
+        <svg viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg">
+            <g fill="rgba(139, 69, 19, 0.4)" transform="${isLeft ? '' : 'scale(-1, 1) translate(-40, 0)'}">
+                <!-- Heel -->
+                <ellipse cx="20" cy="40" rx="12" ry="8"/>
+                <!-- Ball of foot -->
+                <ellipse cx="20" cy="25" rx="13" ry="10"/>
+                <!-- Toes -->
+                <circle cx="15" cy="10" r="4"/>
+                <circle cx="20" cy="8" r="4"/>
+                <circle cx="25" cy="10" r="4"/>
+                <circle cx="28" cy="14" r="3.5"/>
+            </g>
+        </svg>
+    `;
+    
+    footprintsContainer.appendChild(footprint);
+    
+    // Remove after animation
+    setTimeout(() => {
+        footprint.remove();
+    }, 3000);
 }
 
 // --- Controls ---
@@ -379,6 +492,260 @@ function setupParallax() {
         
         // Apply translation in opposite direction
         bgLayer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+}
+
+// --- Nox Mode (Darkness with Flashlight Effect) ---
+function startNoxMode() {
+    // Hide all UI elements
+    const elementsToHide = [
+        document.getElementById('slide-container'),
+        document.getElementById('prev-btn'),
+        document.getElementById('next-btn'),
+        document.getElementById('candles-container'),
+        document.getElementById('page-indicator'),
+        document.querySelector('header'),
+        document.querySelector('footer')
+    ];
+    
+    elementsToHide.forEach(el => {
+        if (el) {
+            el.style.display = 'none';
+        }
+    });
+
+    // Create the Nox overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'nox-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        cursor: none;
+    `;
+
+    // Create the flashlight layer
+    const flashlight = document.createElement('div');
+    flashlight.id = 'nox-flashlight';
+    flashlight.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(
+            circle 150px at 50% 50%,
+            transparent 0%,
+            transparent 100px,
+            rgba(0, 0, 0, 0.95) 150px,
+            rgba(0, 0, 0, 1) 200px
+        );
+        transition: background 0.05s ease-out;
+    `;
+
+    overlay.appendChild(flashlight);
+    document.body.appendChild(overlay);
+
+    // Create hidden "Nox" button (only visible in flashlight)
+    const noxButton = document.createElement('button');
+    noxButton.id = 'nox-spell-button';
+    noxButton.textContent = 'Nox';
+    noxButton.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgba(255, 255, 255, 0.3);
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        padding: 15px 30px;
+        font-family: 'Cinzel', serif;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 10001;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: auto;
+        border-radius: 8px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    `;
+    document.body.appendChild(noxButton);
+
+    // Add mousemove event for flashlight effect
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    overlay.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Update flashlight position with percentage coordinates
+        const percentX = (mouseX / window.innerWidth) * 100;
+        const percentY = (mouseY / window.innerHeight) * 100;
+
+        flashlight.style.background = `
+            radial-gradient(
+                circle 150px at ${percentX}% ${percentY}%,
+                transparent 0%,
+                transparent 100px,
+                rgba(0, 0, 0, 0.95) 150px,
+                rgba(0, 0, 0, 1) 200px
+            )
+        `;
+
+        // Check if flashlight is near the Nox button
+        const buttonRect = noxButton.getBoundingClientRect();
+        const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+        const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+        
+        const distance = Math.sqrt(
+            Math.pow(mouseX - buttonCenterX, 2) + 
+            Math.pow(mouseY - buttonCenterY, 2)
+        );
+
+        // Show button when flashlight is within 150px
+        if (distance < 150) {
+            const opacity = 1 - (distance / 150);
+            noxButton.style.opacity = opacity;
+            noxButton.style.color = `rgba(251, 191, 36, ${opacity})`;
+            noxButton.style.borderColor = `rgba(251, 191, 36, ${opacity * 0.7})`;
+            noxButton.style.textShadow = `0 0 20px rgba(251, 191, 36, ${opacity})`;
+        } else {
+            noxButton.style.opacity = '0';
+        }
+    });
+
+    // Nox button click - fade to complete darkness
+    noxButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Remove flashlight effect
+        flashlight.style.transition = 'opacity 2s ease-out';
+        flashlight.style.opacity = '0';
+        
+        // Fade overlay to solid black
+        overlay.style.transition = 'background 2s ease-out';
+        overlay.style.background = '#000';
+        
+        // Hide button
+        noxButton.style.transition = 'opacity 1s ease-out';
+        noxButton.style.opacity = '0';
+        
+        // After fade, show message and allow exit
+        setTimeout(() => {
+            flashlight.remove();
+            noxButton.remove();
+            
+            // Create "darkness" message
+            const darknessMsg = document.createElement('div');
+            darknessMsg.id = 'darkness-message';
+            darknessMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: rgba(255, 255, 255, 0.3);
+                font-family: 'Cinzel', serif;
+                font-size: 18px;
+                text-align: center;
+                z-index: 10002;
+                opacity: 0;
+                transition: opacity 2s ease-in;
+            `;
+            darknessMsg.innerHTML = `
+                Complete Darkness<br>
+                <span style="font-size: 14px; margin-top: 10px; display: block;">
+                    Click anywhere or press ESC to exit
+                </span>
+            `;
+            document.body.appendChild(darknessMsg);
+            
+            // Fade in message
+            setTimeout(() => {
+                darknessMsg.style.opacity = '1';
+            }, 100);
+        }, 2000);
+    });
+
+    // Add click to exit Nox mode (but not on button)
+    overlay.addEventListener('click', (e) => {
+        endNoxMode();
+    });
+
+    // Add Escape key to exit
+    const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+            endNoxMode();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    };
+    document.addEventListener('keydown', escapeHandler);
+
+    // Add text hint
+    const hint = document.createElement('div');
+    hint.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'Cinzel', serif;
+        font-size: 14px;
+        text-align: center;
+        z-index: 10000;
+        pointer-events: none;
+    `;
+    hint.textContent = 'Nox Mode Active • Click or press ESC to exit';
+    document.body.appendChild(hint);
+
+    // Store hint reference for cleanup
+    overlay.dataset.hintId = 'nox-hint';
+    hint.id = 'nox-hint';
+}
+
+function endNoxMode() {
+    // Remove overlay and flashlight
+    const overlay = document.getElementById('nox-overlay');
+    const hint = document.getElementById('nox-hint');
+    const noxButton = document.getElementById('nox-spell-button');
+    const darknessMsg = document.getElementById('darkness-message');
+    
+    if (overlay) {
+        overlay.remove();
+    }
+    
+    if (hint) {
+        hint.remove();
+    }
+    
+    if (noxButton) {
+        noxButton.remove();
+    }
+    
+    if (darknessMsg) {
+        darknessMsg.remove();
+    }
+
+    // Show all UI elements again
+    const elementsToShow = [
+        document.getElementById('slide-container'),
+        document.getElementById('prev-btn'),
+        document.getElementById('next-btn'),
+        document.getElementById('candles-container'),
+        document.getElementById('page-indicator'),
+        document.querySelector('header'),
+        document.querySelector('footer')
+    ];
+    
+    elementsToShow.forEach(el => {
+        if (el) {
+            el.style.display = '';
+        }
     });
 }
 
