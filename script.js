@@ -8,39 +8,7 @@ const slides = [
   },
   {
     id: 'q1',
-    title: 'Question 1: Princess as Reward',
-    layout: 'standard',
-    content: [
-      {
-        type: 'quiz',
-        quizItems: [
-          {
-            question: 'How does Lin’s idea of the princess as a “reward” apply to Cinderella?',
-            answer: 'Lin’s argument fits especially well with Grimm Cinderella and Disney’s 1950 version, where Cinderella’s suffering is rewarded through marriage and recognition. The 2015 version adds emotional depth, but the story still resolves through being chosen, reinforcing the princess-as-reward structure.'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'q2',
-    title: 'Question 2: Archetype vs. Stereotype',
-    layout: 'standard',
-    content: [
-      {
-        type: 'quiz',
-        quizItems: [
-          {
-            question: 'When does an archetype become a stereotype in Disney’s Cinderella?',
-            answer: 'According to Lin, an archetype becomes a stereotype when it is shaped more by cultural expectations than narrative needs. In Disney’s Cinderella, kindness, beauty, and patience become predictable requirements, which limits the character’s complexity.'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'q3',
-    title: 'Question 3: Shifting Structure',
+    title: 'Question 1: Shifting Structure',
     layout: 'standard',
     content: [
       {
@@ -55,8 +23,8 @@ const slides = [
     ]
   },
   {
-    id: 'q4',
-    title: 'Question 4: Rescue Scenes',
+    id: 'q2',
+    title: 'Question 2: Rescue Scenes',
     layout: 'standard',
     content: [
       {
@@ -71,8 +39,8 @@ const slides = [
     ]
   },
   {
-    id: 'q5',
-    title: 'Question 5: Agency Comparison',
+    id: 'q3',
+    title: 'Question 3: Agency Comparison',
     layout: 'standard',
     content: [
       {
@@ -87,8 +55,8 @@ const slides = [
     ]
   },
   {
-    id: 'q6',
-    title: 'Question 6: Identity & Belonging',
+    id: 'q4',
+    title: 'Question 4: Identity & Belonging',
     layout: 'standard',
     content: [
       {
@@ -103,8 +71,8 @@ const slides = [
     ]
   },
   {
-    id: 'q7',
-    title: 'Question 7: Types of Power',
+    id: 'q5',
+    title: 'Question 5: Types of Power',
     layout: 'standard',
     content: [
       {
@@ -119,8 +87,8 @@ const slides = [
     ]
   },
   {
-    id: 'q8',
-    title: 'Question 8: Harry as Classic Hero',
+    id: 'q6',
+    title: 'Question 6: Harry as Classic Hero',
     layout: 'standard',
     content: [
       {
